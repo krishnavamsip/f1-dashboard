@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 240 15% 5%;
+    --foreground: 0 0% 96%;
+    --card: 240 14% 9%;
+    --card-foreground: 0 0% 96%;
+    --muted: 240 10% 14%;
+    --muted-foreground: 240 5% 64%;
+    --border: 240 10% 16%;
+  }
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 240 10% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 9% 46%;
+    --border: 220 13% 88%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-color: #0B0B12;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(225,6,0,0.10), transparent),
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.025) 1px, transparent 0);
+    background-size: auto, 22px 22px;
+  }
+  .light body {
+    background-color: #f7f7f9;
+    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(225,6,0,0.06), transparent);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/[0.035] backdrop-blur-xl border border-white/[0.08] shadow-glass;
+  }
+  .light .glass {
+    @apply bg-white/70 backdrop-blur-xl border-black/[0.07] shadow-lg shadow-black/[0.04];
+  }
+  .glass-strong {
+    @apply bg-white/[0.06] backdrop-blur-2xl border border-white/[0.12];
+  }
+  .light .glass-strong {
+    @apply bg-white/90 border-black/[0.08];
+  }
+  .f1-grid {
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .text-display { font-family: 'Space Grotesk', Inter, sans-serif; }
+  .text-mono { font-family: 'JetBrains Mono', monospace; }
+  .f1-red { color: #E10600; }
+  .bg-f1-red { background-color: #E10600; }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #15151E; }
+::-webkit-scrollbar-thumb { background: #2b2b38; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #E10600; }
+
+.noise::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.022;
+  pointer-events: none;
+  border-radius: inherit;
+}
