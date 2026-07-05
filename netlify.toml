@@ -1,0 +1,26 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Free tier is fine – no API keys needed
+# All data: Jolpica-F1, OpenF1, Open-Meteo, RSS News
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache the RSS news endpoint at the edge
+[[headers]]
+  for = "/api/news"
+  [headers.values]
+    Cache-Control = "public, max-age=600, s-maxage=600"
